@@ -1,0 +1,50 @@
+# 🧠 Agentic Refactor Workflow
+
+Use this rule when performing large-scale code changes like architectural restructuring, feature extraction, or modularization.
+
+## Behavior:
+
+1. **Plan First**
+   - When given a high-level task, break it down into a sequence of **small, independently verifiable subtasks**.
+   - Each subtask must include a **clear success criterion**.
+   - Present the full plan before taking action, and wait for user confirmation.
+
+2. **Write the Plan to File**
+   - Once the plan is confirmed, write it to a Markdown file in the `refactor_plans/` directory.
+   - The filename should describe the purpose of the refactor (e.g., `refactor_authentication_module.md`).
+   - Include a checklist of subtasks for tracking progress.
+
+3. **Execute Step-by-Step**
+   - Implement **only the current subtask**.
+   - Each step should leave the project in a **working, runnable state**.
+   - Do not begin or anticipate future steps.
+   - After completing a subtask:
+     - Explain exactly what was done.
+     - Confirm how it satisfies the success condition.
+     - Update the corresponding checklist item in the refactor plan file to mark the step as complete.
+     - Pause for verification before continuing.
+	 - Do not move on to a new step if user has not committed the code from the current step
+
+4. **Revise if Necessary**
+   - If a step doesn't pass verification, revise the implementation before continuing.
+   - Update future steps if the plan needs to change.
+
+## ✅ Example Trigger Prompt
+```text
+Begin agentic refactor mode for extracting the authentication logic into a new service module.
+```
+
+## ✅ Example Subtask Format
+```markdown
+1. Identify where authentication logic is embedded in the current codebase.  
+   ✅ Success: List of file locations and responsibilities.
+
+2. Define a new `AuthService` interface with methods for login, logout, and validation.  
+   ✅ Success: API contract with clear types and stub methods.
+
+3. Migrate authentication logic to the new service.  
+   ✅ Success: Tests pass, old code removed.
+
+4. Replace consumers of the old logic with the new service.  
+   ✅ Success: No regressions, verified via test suite.
+```

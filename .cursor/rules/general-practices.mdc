@@ -1,0 +1,35 @@
+---
+description: Enforces general programming best practices across all languages.
+alwaysApply: true
+---
+
+# 🧠 General Programming Best Practices
+
+Apply these when writing or refactoring any code in this project.
+
+## ✅ Type Safety
+- Avoid stringly-typed APIs (e.g., prefer enums over raw strings).
+- Prefer enums, classes, or constants over raw strings or magic values.
+
+## ✅ Dependency Clarity
+- Favor explicit imports and injections over global state or singleton patterns.
+- Minimize side effects during module load time.
+
+## ✅ Naming
+- Use descriptive names. Avoid abbreviations unless well-established (e.g., `UI`, `ID`).
+- Functions should be named with verbs; classes with nouns.
+
+## ✅ Modularity & Single Responsibility
+- Functions should do one thing. If a function is handling input, updating state, and rendering — break it up.
+
+## ✅ Defensive Programming
+- Validate inputs early and clearly.
+- Avoid silent failure patterns (e.g., catching `Exception` and doing nothing).
+
+## ✅ Code Comments
+- Use comments for *why*, not *what*. Code should express the *what*.
+
+## ✅ Refactor Signals
+- More than 2 levels of nesting → extract logic
+- Repeated string literals → extract constant
+- Copy-paste across files → extract module

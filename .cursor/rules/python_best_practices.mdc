@@ -1,0 +1,28 @@
+---
+description: Enforce Poetry and modern tooling for Python projects
+globs: **/*.py
+alwaysApply: true
+---
+
+# 🐍 Python Best Practices & Poetry Enforced
+
+## ✅ Dependency management
+- **All** dependencies must be managed via Poetry:
+  - `poetry add <package>`, `poetry remove <package>`
+  - `poetry lock` for updates
+- **Do not** use `pip install`, `pipenv`, `conda`, or any other installer script.
+
+## 🚀 Virtual environments & execution
+- Use `poetry shell` or `poetry run <command>`
+- Always run scripts, tests, linters via `poetry run`
+
+## 🧪 Testing & quality assurance
+- Run tests with `pytest`, managed by Poetry.
+- Use modern linting tools: `ruff`, `black`, `isort`.
+- Prefer setting up pre-commit hooks for these tools.
+
+## 🎯 Code Quality Standards
+- Use dataclasses for structured data
+- Prefer composition over inheritance
+- Avoid passing raw strings or magic values
+- Use type hints for better code clarity

@@ -1,0 +1,89 @@
+---
+description: Agentic feature planning workflow for any project type.
+alwaysApply: false
+---
+
+# 🧠 Agentic Feature Planning (Trigger-Based)
+
+Use this rule when explicitly triggered. Ideal for:
+- Designing new features from scratch
+- Planning APIs, UI components, or architecture shifts
+- Coordinating cross-layer implementation
+
+## 🔗 Trigger Phrase
+```text
+Begin agentic feature planning for [feature name or goal]
+```
+
+## Workflow
+
+1. **Consult Project Strategy**
+   - **IF EXISTS**: Reference project roadmap, backlog, or strategic planning documents
+   - Determine which development phase the feature belongs to (MVP, Core Features, Enhancement, etc.)
+   - Check priority level and dependencies
+   - Validate feature aligns with current project priorities
+
+2. **Define the Goal**
+   - Confirm the user's high-level objective in 1–2 sentences.
+   - **Cross-reference with strategy**: Explain how this feature fits into the project plan
+   - Ask clarifying questions if needed to ensure shared understanding.
+
+3. **Decompose Into Subfeatures or Modules**
+   - Break the feature into logical parts (backend, frontend, database, API, etc.)
+   - For each, define a clear and independently testable **success criterion**.
+   - **Apply project constraints**: Consider technology stack, performance, and deployment requirements
+
+4. **Prioritize and Sequence**
+   - Propose an implementation order with a brief justification.
+   - **Align with project phases**: Ensure sequence matches strategic priorities
+   - Flag dependencies or blockers if present.
+
+5. **Write Plan to File**
+   - Save the feature plan to `feature_plans/feature_<name>.md`
+   - Include a Markdown checklist for each subfeature
+   - **Reference strategic alignment**: Note which phase and priority tier this feature addresses
+
+6. **Execute Step-by-Step**
+   - Work only on the **first subfeature**.
+   - After implementation:
+     - Explain what was done
+     - Confirm that it satisfies the success condition
+     - Pause for user verification before continuing
+   - (Optional: Commit code before continuing to the next subfeature.)
+
+## ✅ Example Trigger
+```text
+Begin agentic feature planning for adding user authentication system to our web application.
+```
+
+## ✅ Example Checklist Format
+```markdown
+# 🧩 Feature Plan: User Authentication System
+
+## Strategic Context
+- **Project Phase**: Phase 1 - Core MVP Features
+- **Priority Tier**: ⭐⭐⭐ Critical (Security requirement)
+- **Dependencies**: Database schema (✅ complete), User model (❌ pending)
+
+## Goal
+Implement secure user authentication with registration, login, and session management.
+
+## Subfeatures
+- [ ] User registration API endpoint
+- [ ] Password hashing and validation
+- [ ] Login/logout functionality
+- [ ] Session management middleware
+- [ ] Frontend authentication UI
+- [ ] Password reset flow
+
+## Technical Considerations
+- Security best practices (bcrypt, JWT tokens)
+- Database migrations for user tables
+- Frontend state management for auth
+- API rate limiting for auth endpoints
+
+## Notes
+- Aligns with security requirements
+- Prerequisite for user-specific features
+- Must implement proper error handling and validation
+```
