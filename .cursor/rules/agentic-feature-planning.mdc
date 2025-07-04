@@ -1,6 +1,7 @@
 ---
-description: Agentic feature planning workflow for any project type.
-alwaysApply: false
+description: 
+globs: 
+alwaysApply: true
 ---
 
 # 🧠 Agentic Feature Planning (Trigger-Based)
