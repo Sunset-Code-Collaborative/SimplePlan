@@ -1,0 +1,54 @@
+{
+  "project_id": "06d7e4c6",
+  "name": "SimplePlan Development",
+  "description": "Implementing the core SimplePlan functionality",
+  "created_at": "2025-07-04T12:30:13.295658",
+  "updated_at": "2025-07-04T12:31:03.878479",
+  "steps": [
+    {
+      "id": "STEP-001",
+      "description": "Implement core project_plan_io module",
+      "complete": true,
+      "dependencies": [],
+      "assigned_to": "bjorn",
+      "step_type": "development",
+      "metadata": {},
+      "created_at": "2025-07-04T12:30:19.763140",
+      "completed_at": "2025-07-04T12:30:43.876553"
+    },
+    {
+      "id": "STEP-002",
+      "description": "Create CLI interface",
+      "complete": true,
+      "dependencies": [
+        "STEP-001"
+      ],
+      "assigned_to": "AI",
+      "step_type": "development",
+      "metadata": {},
+      "created_at": "2025-07-04T12:30:25.520033",
+      "completed_at": "2025-07-04T12:30:59.286897"
+    },
+    {
+      "id": "STEP-003",
+      "description": "Write comprehensive tests",
+      "complete": true,
+      "dependencies": [
+        "STEP-001",
+        "STEP-002"
+      ],
+      "assigned_to": "AI",
+      "step_type": "testing",
+      "metadata": {},
+      "created_at": "2025-07-04T12:30:30.278965",
+      "completed_at": "2025-07-04T12:31:03.878462"
+    }
+  ],
+  "metadata": {
+    "initiator": "bjorn",
+    "ai_generated": true,
+    "tags": [],
+    "priority": "medium",
+    "estimated_duration": null
+  }
+}
