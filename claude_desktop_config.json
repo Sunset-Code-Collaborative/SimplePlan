@@ -1,0 +1,15 @@
+{
+	"mcpServers": {
+		"simpleplan": {
+			"command": "poetry",
+			"args": [
+				"run",
+				"python",
+				"-m",
+				"src.simpleplan.mcp_server"
+			],
+			"cwd": "/Users/bjornjohnson/dev/SimplePlan",
+			"env": {}
+		}
+	}
+}

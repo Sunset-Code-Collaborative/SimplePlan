@@ -3,7 +3,7 @@
   "name": "SimplePlan Development",
   "description": "Implementing the core SimplePlan functionality",
   "created_at": "2025-07-04T12:30:13.295658",
-  "updated_at": "2025-07-04T12:31:03.878479",
+  "updated_at": "2025-07-06T16:46:18.119196",
   "steps": [
     {
       "id": "STEP-001",
@@ -42,6 +42,84 @@
       "metadata": {},
       "created_at": "2025-07-04T12:30:30.278965",
       "completed_at": "2025-07-04T12:31:03.878462"
+    },
+    {
+      "id": "STEP-004",
+      "description": "Install MCP dependencies (fastmcp, mcp)",
+      "complete": true,
+      "dependencies": [
+        "STEP-003"
+      ],
+      "assigned_to": "AI",
+      "step_type": "setup",
+      "metadata": {},
+      "created_at": "2025-07-06T16:40:34.824366",
+      "completed_at": "2025-07-06T16:43:37.795992"
+    },
+    {
+      "id": "STEP-005",
+      "description": "Create MCP server wrapper (mcp_server.py) with FastMCP integration",
+      "complete": true,
+      "dependencies": [
+        "STEP-004"
+      ],
+      "assigned_to": "AI",
+      "step_type": "development",
+      "metadata": {},
+      "created_at": "2025-07-06T16:40:41.225926",
+      "completed_at": "2025-07-06T16:45:58.753713"
+    },
+    {
+      "id": "STEP-006",
+      "description": "Implement MCP tools for project plan operations (create, status, add_step, complete_step)",
+      "complete": true,
+      "dependencies": [
+        "STEP-005"
+      ],
+      "assigned_to": "AI",
+      "step_type": "development",
+      "metadata": {},
+      "created_at": "2025-07-06T16:40:47.867595",
+      "completed_at": "2025-07-06T16:46:18.119185"
+    },
+    {
+      "id": "STEP-007",
+      "description": "Configure Claude Desktop integration with claude_desktop_config.json",
+      "complete": false,
+      "dependencies": [
+        "STEP-006"
+      ],
+      "assigned_to": "AI",
+      "step_type": "configuration",
+      "metadata": {},
+      "created_at": "2025-07-06T16:40:54.922117",
+      "completed_at": null
+    },
+    {
+      "id": "STEP-008",
+      "description": "Test MCP server integration with Claude Desktop",
+      "complete": false,
+      "dependencies": [
+        "STEP-007"
+      ],
+      "assigned_to": "AI",
+      "step_type": "testing",
+      "metadata": {},
+      "created_at": "2025-07-06T16:41:01.396408",
+      "completed_at": null
+    },
+    {
+      "id": "STEP-009",
+      "description": "Create MCP integration documentation and usage examples",
+      "complete": false,
+      "dependencies": [
+        "STEP-008"
+      ],
+      "assigned_to": "AI",
+      "step_type": "documentation",
+      "metadata": {},
+      "created_at": "2025-07-06T16:41:07.579762",
+      "completed_at": null
     }
   ],
   "metadata": {
