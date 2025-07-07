@@ -50,5 +50,5 @@ dmypy.json
 .poetry/
 poetry.lock
 
-# Private business documents
-.business/
+# Cache files
+.cache/
