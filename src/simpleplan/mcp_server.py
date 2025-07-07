@@ -16,8 +16,8 @@ from rich.console import Console
 from .project_plan_io import ProjectPlanIO
 
 # Initialize FastMCP server
-mcp = FastMCP("simpleplan")
-console = Console()
+mcp: FastMCP = FastMCP("simpleplan")
+console: Console = Console()
 
 
 @mcp.tool()
