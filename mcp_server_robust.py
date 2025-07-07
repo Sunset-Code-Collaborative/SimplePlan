@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Robust SimplePlan MCP Server - Follows MCP debugging best practices."""
+"""Robust SimplePlan MCP Server - Follows MCP debugging best practices.
+
+Copyright (c) 2025 Bjorn Johnson
+Licensed under the MIT License - see LICENSE file for details.
+"""
 
 import sys
 import os

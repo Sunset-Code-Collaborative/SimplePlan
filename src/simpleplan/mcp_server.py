@@ -1,4 +1,8 @@
-"""MCP Server for SimplePlan - Enables AI systems to manage project plans via Model Context Protocol."""
+"""MCP Server for SimplePlan - Enables AI systems to manage project plans via Model Context Protocol.
+
+Copyright (c) 2025 Bjorn Johnson
+Licensed under the MIT License - see LICENSE file for details.
+"""
 
 import asyncio
 import sys
