@@ -1,4 +1,6 @@
-"""MCP Server for SimplePlan - Enables AI systems to manage project plans via Model Context Protocol.
+"""MCP Server for SimplePlan - Enables AI systems to manage project plans.
+
+Model Context Protocol integration for AI systems.
 
 Copyright (c) 2025 Bjorn Johnson
 Licensed under the MIT License - see LICENSE file for details.
@@ -83,7 +85,10 @@ async def get_project_status(project_file: Optional[str] = None) -> Dict[str, An
             "completion_percentage": completion_percentage,
             "completed_steps": len(completed_steps),
             "total_steps": total_steps,
-            "status_summary": f"{len(completed_steps)}/{total_steps} steps complete ({completion_percentage:.1f}%)",
+            "status_summary": (
+                f"{len(completed_steps)}/{total_steps} steps complete "
+                f"({completion_percentage:.1f}%)"
+            ),
             "created_at": plan.created_at.isoformat(),
             "updated_at": plan.updated_at.isoformat(),
         }
@@ -181,7 +186,10 @@ async def complete_step(
             return {
                 "success": False,
                 "step_id": step_id,
-                "message": f"Failed to complete step {step_id} - check dependencies or if step exists",
+                "message": (
+                    f"Failed to complete step {step_id} - "
+                    f"check dependencies or if step exists"
+                ),
             }
     except Exception as e:
         return {
@@ -286,7 +294,10 @@ async def list_all_steps(
             "total_steps": len(plan.steps),
             "completed_steps": completed_count,
             "completion_percentage": completion_percentage,
-            "summary": f"{completed_count}/{len(plan.steps)} steps complete ({completion_percentage:.1f}%)",
+            "summary": (
+                f"{completed_count}/{len(plan.steps)} steps complete "
+                f"({completion_percentage:.1f}%)"
+            ),
         }
     except Exception as e:
         return {
@@ -319,9 +330,11 @@ async def validate_project_plan(project_file: Optional[str] = None) -> Dict[str,
             "is_valid": len(errors) == 0,
             "errors": errors,
             "error_count": len(errors),
-            "message": "Project plan is valid"
-            if len(errors) == 0
-            else f"Found {len(errors)} validation errors",
+            "message": (
+                "Project plan is valid"
+                if len(errors) == 0
+                else f"Found {len(errors)} validation errors"
+            ),
         }
     except Exception as e:
         return {

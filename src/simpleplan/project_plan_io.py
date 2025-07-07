@@ -133,7 +133,8 @@ class ProjectPlanIO:
 
                     if missing_deps:
                         self.console.print(
-                            f"❌ Cannot complete {step_id}: dependencies not met: {', '.join(missing_deps)}",
+                            f"❌ Cannot complete {step_id}: "
+                            f"dependencies not met: {', '.join(missing_deps)}",
                             style="red",
                         )
                         return False
@@ -234,7 +235,8 @@ class ProjectPlanIO:
             next_steps = plan.get_next_available_steps()
             if next_steps:
                 self.console.print(
-                    f"🎯 Next available steps: {', '.join(step.id for step in next_steps)}"
+                    f"🎯 Next available steps: "
+                    f"{', '.join(step.id for step in next_steps)}"
                 )
 
         except ProjectPlanError as e:
