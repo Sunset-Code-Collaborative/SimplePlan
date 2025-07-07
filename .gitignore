@@ -49,3 +49,6 @@ dmypy.json
 # Poetry
 .poetry/
 poetry.lock
+
+# Private business documents
+.business/
