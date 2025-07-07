@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "SimplePlan"
-version = "1.0.0"
+version = "1.0.1"
 description = "AI-native project management with MCP integration for universal AI access"
 authors = ["Sunset Code Collaborative, LLC <bjorn@sunsetcodecollaborative.com>"]
 license = "MIT"
