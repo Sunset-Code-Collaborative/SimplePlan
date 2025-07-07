@@ -1,12 +1,9 @@
 {
 	"mcpServers": {
 		"simpleplan": {
-			"command": "poetry",
+			"command": "/Users/bjornjohnson/Library/Caches/pypoetry/virtualenvs/simpleplan-o0OqGAiq-py3.12/bin/python",
 			"args": [
-				"run",
-				"python",
-				"-m",
-				"src.simpleplan.mcp_server"
+				"/Users/bjornjohnson/dev/SimplePlan/mcp_server_robust.py"
 			],
 			"cwd": "/Users/bjornjohnson/dev/SimplePlan",
 			"env": {}

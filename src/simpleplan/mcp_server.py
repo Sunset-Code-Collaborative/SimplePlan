@@ -1,6 +1,7 @@
 """MCP Server for SimplePlan - Enables AI systems to manage project plans via Model Context Protocol."""
 
 import asyncio
+import sys
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 from fastmcp import FastMCP
@@ -321,16 +322,22 @@ async def validate_project_plan(project_file: Optional[str] = None) -> Dict[str,
 
 
 # Main server runner
-if __name__ == "__main__":
-    print("🚀 Starting SimplePlan MCP Server...")
-    print("📋 Available tools:")
-    print("  • create_project_plan - Create new projects")
-    print("  • get_project_status - Check project progress")
-    print("  • add_project_step - Add new steps")
-    print("  • complete_step - Mark steps as done")
-    print("  • get_next_steps - Show available work")
-    print("  • list_all_steps - Display all steps")
-    print("  • validate_project_plan - Check for errors")
-    print("\n📡 Server ready for MCP connections...")
+def main():
+    """Entry point for SimplePlan MCP Server."""
+    # Only log to stderr to avoid interfering with MCP stdin/stdout protocol
+    print("🚀 Starting SimplePlan MCP Server...", file=sys.stderr)
+    print("📋 Available tools:", file=sys.stderr)
+    print("  • create_project_plan - Create new projects", file=sys.stderr)
+    print("  • get_project_status - Check project progress", file=sys.stderr)
+    print("  • add_project_step - Add new steps", file=sys.stderr)
+    print("  • complete_step - Mark steps as done", file=sys.stderr)
+    print("  • get_next_steps - Show available work", file=sys.stderr)
+    print("  • list_all_steps - Display all steps", file=sys.stderr)
+    print("  • validate_project_plan - Check for errors", file=sys.stderr)
+    print("\n📡 Server ready for MCP connections...", file=sys.stderr)
     
-    mcp.run() 
+    mcp.run()
+
+
+if __name__ == "__main__":
+    main() 
