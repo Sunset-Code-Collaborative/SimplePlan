@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Robust SimplePlan MCP Server - Follows MCP debugging best practices.
 
-Copyright (c) 2025 Bjorn Johnson
+Copyright (c) 2025 Sunset Code Collaborative, LLC
 Licensed under the MIT License - see LICENSE file for details.
 """
 
