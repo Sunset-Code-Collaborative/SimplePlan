@@ -2,7 +2,7 @@
 name = "SimplePlan"
 version = "1.0.0"
 description = "AI-native project management with MCP integration for universal AI access"
-authors = ["Bjorn Johnson <bjorn@example.com>"]
+authors = ["Sunset Code Collaborative, LLC <bjorn@sunsetcodecollaborative.com>"]
 license = "MIT"
 readme = "README.md"
 homepage = "https://github.com/bjornjohnson/SimplePlan"

@@ -136,7 +136,7 @@ poetry run mypy .          # Type checking
 
 ## 📄 License & Copyright
 
-**Copyright © 2025 Bjorn Johnson. All rights reserved.**
+**Copyright © 2025 Sunset Code Collaborative, LLC. All rights reserved.**
 
 Licensed under the [MIT License](LICENSE). This means:
 - ✅ **Free to use** for any purpose
@@ -157,9 +157,10 @@ All contributors must respect the copyright and licensing terms.
 
 ## 📞 Contact
 
-**Bjorn Johnson** - Creator & Maintainer
+**Sunset Code Collaborative, LLC** - Creator & Maintainer
+- Contact: Bjorn Johnson, Member
 - GitHub: [@bjornjohnson](https://github.com/bjornjohnson)
-- Email: bjorn@example.com *(replace with your real email)*
+- Email: bjorn@sunsetcodecollaborative.com
 
 ## 🎉 Acknowledgments
 
