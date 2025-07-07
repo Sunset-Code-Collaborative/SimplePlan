@@ -1,0 +1,11 @@
+{
+	"mcpServers": {
+		"simpleplan": {
+			"command": "python",
+			"args": [
+				"/Users/bjornjohnson/dev/SimplePlan/mcp_server_robust.py"
+			],
+			"env": {}
+		}
+	}
+}

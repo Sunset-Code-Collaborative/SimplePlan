@@ -1,13 +1,11 @@
 """Command-line interface for SimplePlan."""
 
-import click
 from pathlib import Path
+
+import click
 from rich.console import Console
-from rich.prompt import Prompt
 
 from .project_plan_io import ProjectPlanIO
-from .models import ProjectPlan, ProjectMetadata
-
 
 console = Console()
 
@@ -20,10 +18,12 @@ def cli():
 
 
 @cli.command()
-@click.option('--name', prompt='Project name', help='Name of the project')
-@click.option('--description', default='', help='Description of the project')
-@click.option('--initiator', default='AI', help='Who initiated this project')
-@click.option('--file', 'plan_file', type=click.Path(), help='Path to project plan file')
+@click.option("--name", prompt="Project name", help="Name of the project")
+@click.option("--description", default="", help="Description of the project")
+@click.option("--initiator", default="AI", help="Who initiated this project")
+@click.option(
+    "--file", "plan_file", type=click.Path(), help="Path to project plan file"
+)
 def create(name: str, description: str, initiator: str, plan_file: str):
     """Create a new project plan."""
     try:
@@ -36,7 +36,9 @@ def create(name: str, description: str, initiator: str, plan_file: str):
 
 
 @cli.command()
-@click.option('--file', 'plan_file', type=click.Path(), help='Path to project plan file')
+@click.option(
+    "--file", "plan_file", type=click.Path(), help="Path to project plan file"
+)
 def status(plan_file: str):
     """Show project plan status."""
     try:
@@ -49,8 +51,12 @@ def status(plan_file: str):
 
 
 @cli.command()
-@click.option('--file', 'plan_file', type=click.Path(), help='Path to project plan file')
-@click.option('--show-completed/--hide-completed', default=True, help='Show completed steps')
+@click.option(
+    "--file", "plan_file", type=click.Path(), help="Path to project plan file"
+)
+@click.option(
+    "--show-completed/--hide-completed", default=True, help="Show completed steps"
+)
 def list(plan_file: str, show_completed: bool):
     """List all steps in the project plan."""
     try:
@@ -62,8 +68,10 @@ def list(plan_file: str, show_completed: bool):
 
 
 @cli.command()
-@click.argument('step_id')
-@click.option('--file', 'plan_file', type=click.Path(), help='Path to project plan file')
+@click.argument("step_id")
+@click.option(
+    "--file", "plan_file", type=click.Path(), help="Path to project plan file"
+)
 def complete(step_id: str, plan_file: str):
     """Mark a step as complete."""
     try:
@@ -79,20 +87,37 @@ def complete(step_id: str, plan_file: str):
 
 
 @cli.command()
-@click.option('--description', prompt='Step description', help='Description of the step')
-@click.option('--type', 'step_type', default='task', help='Type of step (task, refactor, testing, etc.)')
-@click.option('--dependencies', help='Comma-separated list of step IDs this step depends on')
-@click.option('--assigned-to', default='AI', help='Who is assigned to this step')
-@click.option('--file', 'plan_file', type=click.Path(), help='Path to project plan file')
-def add(description: str, step_type: str, dependencies: str, assigned_to: str, plan_file: str):
+@click.option(
+    "--description", prompt="Step description", help="Description of the step"
+)
+@click.option(
+    "--type",
+    "step_type",
+    default="task",
+    help="Type of step (task, refactor, testing, etc.)",
+)
+@click.option(
+    "--dependencies", help="Comma-separated list of step IDs this step depends on"
+)
+@click.option("--assigned-to", default="AI", help="Who is assigned to this step")
+@click.option(
+    "--file", "plan_file", type=click.Path(), help="Path to project plan file"
+)
+def add(
+    description: str,
+    step_type: str,
+    dependencies: str,
+    assigned_to: str,
+    plan_file: str,
+):
     """Add a new step to the project plan."""
     try:
         io = ProjectPlanIO(console)
         path = Path(plan_file) if plan_file else None
-        
+
         # Parse dependencies
-        deps = [dep.strip() for dep in dependencies.split(',')] if dependencies else []
-        
+        deps = [dep.strip() for dep in dependencies.split(",")] if dependencies else []
+
         step_id = io.add_step(description, step_type, deps, assigned_to, path)
         if step_id:
             console.print(f"✅ Added step {step_id}: {description}")
@@ -103,14 +128,16 @@ def add(description: str, step_type: str, dependencies: str, assigned_to: str, p
 
 
 @cli.command()
-@click.option('--file', 'plan_file', type=click.Path(), help='Path to project plan file')
+@click.option(
+    "--file", "plan_file", type=click.Path(), help="Path to project plan file"
+)
 def next(plan_file: str):
     """Show the next available steps to work on."""
     try:
         io = ProjectPlanIO(console)
         path = Path(plan_file) if plan_file else None
         plan = io.load_project_plan(path)
-        
+
         next_steps = plan.get_next_available_steps()
         if next_steps:
             console.print("🎯 Next available steps:")
@@ -123,14 +150,16 @@ def next(plan_file: str):
 
 
 @cli.command()
-@click.option('--file', 'plan_file', type=click.Path(), help='Path to project plan file')
+@click.option(
+    "--file", "plan_file", type=click.Path(), help="Path to project plan file"
+)
 def validate(plan_file: str):
     """Validate the project plan for errors."""
     try:
         io = ProjectPlanIO(console)
         path = Path(plan_file) if plan_file else None
         plan = io.load_project_plan(path)
-        
+
         errors = plan.validate_dependencies()
         if errors:
             console.print("❌ Validation errors found:", style="red")
@@ -142,5 +171,5 @@ def validate(plan_file: str):
         console.print(f"❌ Error validating project plan: {e}", style="red")
 
 
-if __name__ == '__main__':
-    cli() 
+if __name__ == "__main__":
+    cli()

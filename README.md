@@ -5,6 +5,8 @@
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://python.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-green.svg)](https://modelcontextprotocol.io/)
+[![Tests](https://github.com/bjornjohnson/SimplePlan/actions/workflows/test.yml/badge.svg)](https://github.com/bjornjohnson/SimplePlan/actions/workflows/test.yml)
+[![Publish](https://github.com/bjornjohnson/SimplePlan/actions/workflows/publish.yml/badge.svg)](https://github.com/bjornjohnson/SimplePlan/actions/workflows/publish.yml)
 
 ## 🚀 What is SimplePlan?
 
