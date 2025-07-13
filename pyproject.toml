@@ -5,9 +5,9 @@ description = "AI-native project management with MCP integration for universal A
 authors = ["Sunset Code Collaborative, LLC <bjorn@sunsetcodecollaborative.com>"]
 license = "MIT"
 readme = "README.md"
-homepage = "https://github.com/bjornjohnson/SimplePlan"
-repository = "https://github.com/bjornjohnson/SimplePlan"
-documentation = "https://github.com/bjornjohnson/SimplePlan/blob/main/README.md"
+homepage = "https://github.com/Sunset-Code-Collaborative/SimplePlan"
+repository = "https://github.com/Sunset-Code-Collaborative/SimplePlan"
+documentation = "https://github.com/Sunset-Code-Collaborative/SimplePlan/blob/main/README.md"
 keywords = ["project-management", "ai", "mcp", "planning", "workflow"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
