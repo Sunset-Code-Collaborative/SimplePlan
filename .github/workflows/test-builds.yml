@@ -1,0 +1,201 @@
+name: Test Builds
+
+on:
+  workflow_dispatch:
+    inputs:
+      os_filter:
+        description: 'Which OS to build for (all, ubuntu, windows, macos)'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+          - all
+          - ubuntu
+          - windows
+          - macos
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'pyproject.toml'
+      - '.github/workflows/**'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Poetry
+      uses: snok/install-poetry@v1
+      with:
+        version: 1.7.1
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+      run: poetry install --no-interaction --no-root
+
+    - name: Install project
+      run: poetry install --no-interaction
+
+    - name: Run tests
+      run: poetry run pytest
+
+    - name: Run linting
+      run: |
+        poetry run ruff check .
+        poetry run black --check .
+        poetry run isort --check-only .
+
+  test-build-executables:
+    needs: test
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            os_filter: ubuntu
+          - os: windows-latest
+            os_filter: windows
+          - os: macos-14
+            os_filter: macos
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Check if should run for this OS
+      id: should_run
+      shell: bash
+      run: |
+        should_run="true"
+        if [[ "${{ github.event.inputs.os_filter || 'all' }}" != "all" && "${{ github.event.inputs.os_filter || 'all' }}" != "${{ matrix.os_filter }}" ]]; then
+          should_run="false"
+        fi
+        echo "should_run=$should_run" >> $GITHUB_OUTPUT
+        echo "Will run build test for ${{ matrix.os }}: $should_run"
+
+    - uses: actions/checkout@v4
+      if: steps.should_run.outputs.should_run == 'true'
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.12"
+      if: steps.should_run.outputs.should_run == 'true'
+
+    - name: Install Poetry (Non-Windows)
+      uses: snok/install-poetry@v1
+      with:
+        version: 1.7.1
+        virtualenvs-create: true
+        virtualenvs-in-project: true
+        installer-parallel: true
+      if: steps.should_run.outputs.should_run == 'true' && runner.os != 'Windows'
+
+    - name: Install Poetry (Windows)
+      if: runner.os == 'Windows' && steps.should_run.outputs.should_run == 'true'
+      shell: pwsh
+      run: |
+        echo "Installing Poetry on Windows..."
+        # Use pip to install poetry directly
+        python -m pip install --upgrade pip
+        python -m pip install poetry==1.7.1
+
+        # Add Python Scripts to PATH
+        $userScripts = [System.IO.Path]::Combine($env:APPDATA, "Python", "Scripts")
+        $localScripts = [System.IO.Path]::Combine($env:LOCALAPPDATA, "Programs", "Python", "Python312", "Scripts")
+
+        echo "Adding to PATH: $userScripts"
+        echo $userScripts >> $env:GITHUB_PATH
+        echo "Adding to PATH: $localScripts"
+        echo $localScripts >> $env:GITHUB_PATH
+
+        # Also add the current Python Scripts directory
+        $pythonScripts = [System.IO.Path]::Combine($env:pythonLocation, "Scripts")
+        echo "Adding to PATH: $pythonScripts"
+        echo $pythonScripts >> $env:GITHUB_PATH
+
+    - name: Verify Poetry installation
+      shell: bash
+      run: |
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          # On Windows, try different methods to find poetry
+          poetry.exe --version || poetry --version || python -m poetry --version
+        else
+          poetry --version
+        fi
+      if: steps.should_run.outputs.should_run == 'true'
+
+    - name: Load cached venv
+      id: cached-poetry-dependencies
+      uses: actions/cache@v3
+      with:
+        path: .venv
+        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      if: steps.should_run.outputs.should_run == 'true'
+
+    - name: Install dependencies
+      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true' && steps.should_run.outputs.should_run == 'true'
+      shell: bash
+      run: |
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          poetry.exe install --no-interaction --no-root || poetry install --no-interaction --no-root || python -m poetry install --no-interaction --no-root
+        else
+          poetry install --no-interaction --no-root
+        fi
+
+    - name: Install project
+      shell: bash
+      run: |
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          poetry.exe install --no-interaction || poetry install --no-interaction || python -m poetry install --no-interaction
+        else
+          poetry install --no-interaction
+        fi
+      if: steps.should_run.outputs.should_run == 'true'
+
+    - name: Run tests
+      shell: bash
+      run: |
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          poetry.exe run pytest || poetry run pytest || python -m poetry run pytest
+        else
+          poetry run pytest
+        fi
+      if: steps.should_run.outputs.should_run == 'true'
+
+    - name: Run linting
+      shell: bash
+      run: |
+        if [[ "${{ runner.os }}" == "Windows" ]]; then
+          poetry.exe run ruff check . || poetry run ruff check . || python -m poetry run ruff check .
+          poetry.exe run black --check . || poetry run black --check . || python -m poetry run black --check .
+          poetry.exe run isort --check-only . || poetry run isort --check-only . || python -m poetry run isort --check-only .
+        else
+          poetry run ruff check .
+          poetry run black --check .
+          poetry run isort --check-only .
+        fi
+      if: steps.should_run.outputs.should_run == 'true'

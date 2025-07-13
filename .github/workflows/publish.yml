@@ -3,6 +3,13 @@ name: Publish to PyPI and GitHub Releases
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      test_build_only:
+        description: 'Run only test and build jobs (no publishing)'
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: write
@@ -58,6 +65,7 @@ jobs:
   build-and-publish:
     needs: test
     runs-on: ubuntu-latest
+    if: github.event_name == 'release'
 
     steps:
     - uses: actions/checkout@v4
@@ -106,65 +114,13 @@ jobs:
 
   build-executables:
     needs: test
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        include:
-          - os: ubuntu-latest
-            asset_name: simpleplan-linux
-          - os: windows-latest
-            asset_name: simpleplan-windows.exe
-          - os: macos-latest
-            asset_name: simpleplan-macos
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.12"
-
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with:
-        version: 1.7.1
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-        installer-parallel: true
-
-    - name: Add Poetry to PATH (Windows)
-      if: runner.os == 'Windows'
-      run: echo "$env:APPDATA\Python\Scripts" >> $env:GITHUB_PATH
-
-    - name: Verify Poetry installation
-      run: poetry --version
-
-    - name: Load cached venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
-      with:
-        path: .venv
-        key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-
-    - name: Install dependencies
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction --no-root
-
-    - name: Install project
-      run: poetry install --no-interaction
-
-    - name: Build executable
-      run: poetry run pyinstaller --onefile --name ${{ matrix.asset_name }} src/simpleplan/main.py
-
-    - name: Upload executable to release
-      if: github.event_name == 'release'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        gh release upload ${{ github.event.release.tag_name }} ./dist/${{ matrix.asset_name }} --clobber
+    uses: ./.github/workflows/build-executables.yml
+    with:
+      os_filter: 'all'
+      upload_artifacts: ${{ github.event_name == 'workflow_dispatch' }}
+      upload_to_release: ${{ github.event_name == 'release' }}
+      release_tag: ${{ github.event.release.tag_name }}
+    secrets: inherit
 
   update-version:
     needs: [build-and-publish, build-executables]
