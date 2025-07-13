@@ -4,6 +4,11 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+  actions: read
+  id-token: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -22,9 +27,10 @@ jobs:
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
-        version: latest
+        version: 1.7.1
         virtualenvs-create: true
         virtualenvs-in-project: true
+        installer-parallel: true
 
     - name: Load cached venv
       id: cached-poetry-dependencies
@@ -64,9 +70,10 @@ jobs:
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
-        version: latest
+        version: 1.7.1
         virtualenvs-create: true
         virtualenvs-in-project: true
+        installer-parallel: true
 
     - name: Load cached venv
       id: cached-poetry-dependencies
@@ -92,14 +99,10 @@ jobs:
 
     - name: Upload wheel to release
       if: github.event_name == 'release'
-      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./dist/simpleplan-${{ github.event.release.tag_name }}-py3-none-any.whl
-        asset_name: simpleplan-${{ github.event.release.tag_name }}-py3-none-any.whl
-        asset_content_type: application/zip
+      run: |
+        gh release upload ${{ github.event.release.tag_name }} ./dist/simpleplan-${{ github.event.release.tag_name }}-py3-none-any.whl --clobber
 
   build-executables:
     needs: test
@@ -127,9 +130,17 @@ jobs:
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
-        version: latest
+        version: 1.7.1
         virtualenvs-create: true
         virtualenvs-in-project: true
+        installer-parallel: true
+
+    - name: Add Poetry to PATH (Windows)
+      if: runner.os == 'Windows'
+      run: echo "$env:APPDATA\Python\Scripts" >> $env:GITHUB_PATH
+
+    - name: Verify Poetry installation
+      run: poetry --version
 
     - name: Load cached venv
       id: cached-poetry-dependencies
@@ -150,14 +161,10 @@ jobs:
 
     - name: Upload executable to release
       if: github.event_name == 'release'
-      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./dist/${{ matrix.asset_name }}
-        asset_name: ${{ matrix.asset_name }}
-        asset_content_type: application/octet-stream
+      run: |
+        gh release upload ${{ github.event.release.tag_name }} ./dist/${{ matrix.asset_name }} --clobber
 
   update-version:
     needs: [build-and-publish, build-executables]
@@ -168,6 +175,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -177,9 +185,10 @@ jobs:
     - name: Install Poetry
       uses: snok/install-poetry@v1
       with:
-        version: latest
+        version: 1.7.1
         virtualenvs-create: true
         virtualenvs-in-project: true
+        installer-parallel: true
 
     - name: Update version in pyproject.toml
       run: |
@@ -194,4 +203,4 @@ jobs:
         git config --local user.name "GitHub Action"
         git add pyproject.toml
         git commit -m "Update version to ${{ github.event.release.tag_name }}" || exit 0
-        git push
+        git push origin main
