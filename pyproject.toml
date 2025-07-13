@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "SimplePlan"
-version = "1.0.3"
+version = "0.0.1"
 description = "AI-native project management with MCP integration for universal AI access"
 authors = ["Sunset Code Collaborative, LLC <bjorn@sunsetcodecollaborative.com>"]
 license = "MIT"
@@ -19,6 +19,9 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Office/Business :: Scheduling"
+]
+packages = [
+    { include = "simpleplan", from = "src" },
 ]
 
 [tool.poetry.dependencies]
@@ -40,8 +43,8 @@ pyinstaller = "^6.14.2"
 pytest-cov = "^6.2.1"
 
 [tool.poetry.scripts]
-simpleplan = "src.main:main"
-simpleplan-mcp = "src.simpleplan.mcp_server:main"
+simpleplan = "simpleplan.main:main"
+simpleplan-mcp = "simpleplan.mcp_server:main"
 
 [tool.ruff]
 line-length = 88
