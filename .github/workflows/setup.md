@@ -139,4 +139,4 @@ Add these to your README.md:
 
 ---
 
-*Automated workflows make releases effortless and reliable! 🚀* 
+*Automated workflows make releases effortless and reliable! 🚀*

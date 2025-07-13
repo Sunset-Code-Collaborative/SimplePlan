@@ -39,7 +39,7 @@ dist/
    git add pyproject.toml
    git commit -m "Bump version to $(poetry version -s)"
    git push
-   
+
    # Create GitHub release (triggers automation)
    # Go to GitHub → Releases → Create new release
    # Tag: v1.0.1, Title: SimplePlan v1.0.1
@@ -102,7 +102,7 @@ dist/
    ```bash
    # Python package
    pip install https://github.com/bjornjohnson/SimplePlan/releases/download/v1.0.0/simpleplan-1.0.0-py3-none-any.whl
-   
+
    # Standalone executable
    curl -L https://github.com/bjornjohnson/SimplePlan/releases/download/v1.0.0/simpleplan -o simpleplan
    chmod +x simpleplan
@@ -258,7 +258,7 @@ chmod +x simpleplan
 SimplePlan is now professionally packaged with full CI/CD automation:
 
 - ✅ **Automated Publishing** - Zero-maintenance releases via GitHub
-- ✅ **Multi-platform Executables** - Linux, Windows, macOS built automatically  
+- ✅ **Multi-platform Executables** - Linux, Windows, macOS built automatically
 - ✅ **Quality Assurance** - Tests must pass before publishing
 - ✅ **PyPI Distribution** - Automatic publishing to PyPI
 - ✅ **Professional Metadata** - Complete package information
@@ -274,4 +274,4 @@ SimplePlan is now professionally packaged with full CI/CD automation:
 
 ---
 
-*Copyright © 2025 Sunset Code Collaborative, LLC* 
+*Copyright © 2025 Sunset Code Collaborative, LLC*

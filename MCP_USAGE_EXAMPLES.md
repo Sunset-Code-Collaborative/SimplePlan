@@ -31,7 +31,7 @@ add_project_step(
 
 add_project_step(
     description="Create REST API endpoints for CRUD operations",
-    step_type="development", 
+    step_type="development",
     dependencies=["STEP-002"]
 )
 
@@ -54,7 +54,7 @@ add_project_step(
 )
 
 add_project_step(
-    description="Deploy to production environment", 
+    description="Deploy to production environment",
     step_type="deployment",
     dependencies=["STEP-006"]
 )
@@ -168,7 +168,7 @@ I recommend focusing on STEP-004 and STEP-005 since they can be done in parallel
 # Check web app project
 get_project_status(project_file="finance_tracker.json")
 
-# Check mobile app project  
+# Check mobile app project
 get_project_status(project_file="mobile_app.json")
 
 # Add cross-project dependency
@@ -207,7 +207,7 @@ add_project_step(
 )
 
 add_project_step(
-    description="Refactor API to support new data structure", 
+    description="Refactor API to support new data structure",
     step_type="development",
     dependencies=["STEP-NEW-001"]
 )
@@ -238,7 +238,7 @@ add_project_step(
 
 add_project_step(
     description="Create responsive dashboard layout",
-    step_type="development", 
+    step_type="development",
     assigned_to="Frontend Team",
     dependencies=["STEP-002"]
 )
@@ -249,7 +249,7 @@ get_project_status()
 
 **AI:** "Team assignments updated:
 - **Backend Team**: Payment processing (can start immediately)
-- **Frontend Team**: Dashboard layout (can start immediately)  
+- **Frontend Team**: Dashboard layout (can start immediately)
 - **QA Team**: Ready to test user authentication (STEP-005 complete)
 
 All teams can work in parallel right now. Next bottleneck will be in 3 days when integration testing begins."
@@ -284,4 +284,4 @@ All teams can work in parallel right now. Next bottleneck will be in 3 days when
 
 ---
 
-**🎯 These examples show how SimplePlan MCP transforms AI from a passive advisor to an active project management partner!** 
+**🎯 These examples show how SimplePlan MCP transforms AI from a passive advisor to an active project management partner!**

@@ -73,7 +73,7 @@
 
 - [x] **STEP-006**: Implement MCP tools for project plan operations
   - ✅ create_project_plan() - Create new projects via AI
-  - ✅ get_project_status() - Check project progress 
+  - ✅ get_project_status() - Check project progress
   - ✅ add_project_step() - Add steps during AI conversations
   - ✅ complete_step() - Mark steps complete from AI tools
   - ✅ get_next_steps() - Show available work to AI
@@ -219,4 +219,4 @@ SimplePlan is now a **fully functional AI-native project management tool** with:
 
 ---
 
-*This plan provides a clear roadmap from the current prototype state to a production-ready CLI tool for AI-assisted project management.* 
+*This plan provides a clear roadmap from the current prototype state to a production-ready CLI tool for AI-assisted project management.*

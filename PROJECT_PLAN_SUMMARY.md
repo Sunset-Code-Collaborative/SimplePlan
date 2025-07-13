@@ -16,7 +16,7 @@
 1. **🖥️ CLI Interface** - Full command-line tool
    - `simpleplan create` - Create new project plans
    - `simpleplan list` - Beautiful table display of all steps
-   - `simpleplan add` - Add steps with dependency management  
+   - `simpleplan add` - Add steps with dependency management
    - `simpleplan complete` - Mark steps done with validation
    - `simpleplan status` - Show completion percentage
    - `simpleplan next` - Find next available work
@@ -43,7 +43,7 @@
 
 ### ✅ **Phase 1: Core Foundation (MVP) - COMPLETE**
 - [x] **STEP-001**: Core project_plan_io module ✅
-- [x] **STEP-002**: CLI interface with Click ✅  
+- [x] **STEP-002**: CLI interface with Click ✅
 - [x] **STEP-003**: Comprehensive test suite ✅
 
 ### ✅ **Phase 2: MCP Integration - COMPLETE**
@@ -103,7 +103,7 @@ poetry run simpleplan complete STEP-001
 poetry run simpleplan status
 ```
 
-### **MCP Usage** 
+### **MCP Usage**
 Configure Claude Desktop with SimplePlan MCP server and ask AI to manage your projects directly!
 
 ## 🎊 **Project Complete!**
@@ -119,4 +119,4 @@ SimplePlan has evolved from concept to **production-ready AI-native project mana
 
 **🏆 SimplePlan: The future of AI-human project collaboration is here!**
 
-*Copyright © 2025 Sunset Code Collaborative, LLC* 
+*Copyright © 2025 Sunset Code Collaborative, LLC*

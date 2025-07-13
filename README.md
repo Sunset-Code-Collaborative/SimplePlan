@@ -13,7 +13,7 @@
 SimplePlan revolutionizes project management by enabling **direct AI control** over project plans. Unlike traditional tools where AI can only suggest actions, SimplePlan's Model Context Protocol (MCP) integration allows AI systems to:
 
 - **Create and manage** project plans autonomously
-- **Track progress** in real-time  
+- **Track progress** in real-time
 - **Add and complete** project steps with dependency validation
 - **Optimize workflows** based on project status
 - **Coordinate teams** through intelligent step assignment
@@ -83,7 +83,7 @@ See [MCP_INTEGRATION.md](MCP_INTEGRATION.md) for complete setup instructions.
 ## 📚 Documentation
 
 - **[MCP Integration Guide](MCP_INTEGRATION.md)** - Complete setup and usage
-- **[Usage Examples](MCP_USAGE_EXAMPLES.md)** - Real-world AI scenarios  
+- **[Usage Examples](MCP_USAGE_EXAMPLES.md)** - Real-world AI scenarios
 - **[Intellectual Property Guide](INTELLECTUAL_PROPERTY.md)** - Ownership and protection
 
 ## 🎯 Why SimplePlan?
@@ -105,12 +105,12 @@ See [MCP_INTEGRATION.md](MCP_INTEGRATION.md) for complete setup instructions.
 ## 🏗️ Architecture
 
 ```
-Claude Desktop (Host) 
+Claude Desktop (Host)
     ↓ JSON-RPC 2.0 via stdio
 SimplePlan MCP Server (FastMCP)
     ↓ Function calls
 SimplePlan Core (project_plan_io.py)
-    ↓ File operations  
+    ↓ File operations
 Project Plan JSON Files
 ```
 
@@ -126,7 +126,7 @@ poetry run pytest
 
 # Development commands
 poetry run black .         # Format code
-poetry run ruff .          # Lint code  
+poetry run ruff .          # Lint code
 poetry run isort .         # Sort imports
 poetry run mypy .          # Type checking
 ```

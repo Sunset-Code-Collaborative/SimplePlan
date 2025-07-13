@@ -36,15 +36,15 @@ Begin agentic refactor mode for extracting the authentication logic into a new s
 
 ## ✅ Example Subtask Format
 ```markdown
-1. Identify where authentication logic is embedded in the current codebase.  
+1. Identify where authentication logic is embedded in the current codebase.
    ✅ Success: List of file locations and responsibilities.
 
-2. Define a new `AuthService` interface with methods for login, logout, and validation.  
+2. Define a new `AuthService` interface with methods for login, logout, and validation.
    ✅ Success: API contract with clear types and stub methods.
 
-3. Migrate authentication logic to the new service.  
+3. Migrate authentication logic to the new service.
    ✅ Success: Tests pass, old code removed.
 
-4. Replace consumers of the old logic with the new service.  
+4. Replace consumers of the old logic with the new service.
    ✅ Success: No regressions, verified via test suite.
 ```
